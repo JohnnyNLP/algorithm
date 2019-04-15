@@ -11,15 +11,17 @@ public class Main {
 		int n = -1;
 		int a = sugar/5;
 		int b = sugar/3;
+		boolean check = false;
 		
-		for (int i = 0; i <=a; i++) {
-			for (int j = 0; j <=b; j++) {
-				int p = 5*i;
-				int k = 3*j;
-				if (p+k == sugar) {
-					n = p/5 + k/3;
+		for (int i = a; i >=0; i--) {
+			for (int j = b; j >=0; j--) {
+				if (5*i+3*j == sugar) {
+					n = i + j;
+					check = true;
+					break;
 				}
 			}
+		if (check) break;
 		}
 		System.out.println(n);
 	}
