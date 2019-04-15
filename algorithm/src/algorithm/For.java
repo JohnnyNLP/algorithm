@@ -4,17 +4,28 @@ import java.util.Scanner;
 
 public class For {
 	
-	// 11720 주어진 숫자의 합 구하기
+	// 11721 문자열 일부만 출력하기
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		int total = scan.nextInt();
-		String dummy = scan.next();
-		int sum = 0;
-		for (int i = 0; i <= total-1; i++) {
-			sum += Integer.parseInt(dummy.substring(i, i+1));
+		String words = scan.next();
+		int token = words.length()/10;
+		for (int i = 0; i < token; i++) {
+			System.out.println(words.substring(i*10, i*10+10));
 		}
-		System.out.println(sum);
+		System.out.println(words.substring(token*10, words.length()));
 	}
+	
+	// 11720 주어진 숫자의 합 구하기
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int total = scan.nextInt();
+//		String dummy = scan.next();
+//		int sum = 0;
+//		for (int i = 0; i <= total-1; i++) {
+//			sum += Integer.parseInt(dummy.substring(i, i+1));
+//		}
+//		System.out.println(sum);
+//	}
 	
 	// 8393 자기 자신까지의 합 구하기
 //	public static void main(String[] args) {
