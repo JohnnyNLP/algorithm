@@ -4,11 +4,20 @@ import java.util.Scanner;
 
 public class Main {
 	
-	// 7287 맞춘 문제, ID 출력
+	// 10172 개 출력하기
 	public static void main(String[] args) {
-		System.out.println(3);
-		System.out.println("pch7678");
+		System.out.println("|\\_/|");
+		System.out.println("|q p|   /}");
+		System.out.println("( 0 )\"\"\"\\");
+		System.out.println("|\"^\"`    |");
+		System.out.println("||_/=\\\\__|");
 	}
+	
+	// 7287 맞춘 문제, ID 출력
+//	public static void main(String[] args) {
+//		System.out.println(3);
+//		System.out.println("pch7678");
+//	}
 	
 	// 1000 A+B 입출력
 //	public static void main(String[] args) {
