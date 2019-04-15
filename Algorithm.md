@@ -149,3 +149,49 @@ public class Main {
 >
 > ​	2-b) 내부 for문이 끝나면 개행문자를 입력하여 다음 시행과 구분하도록 한다.
 
+
+
+## #2349
+
+### 입력한 숫자의 개수만큼 별 거꾸로 찍기
+
+```java
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int a = scan.nextInt();
+		for (int i=1; i<=a; i++) {
+			for(int j=1; j<=a-i; j++) {
+				System.out.print(" ");
+			}
+			for(int k=1; k<=i; k++) {
+				System.out.print("*");
+			}
+			System.out.println();
+		}
+	}
+}
+```
+
+> ```
+> 5
+> ```
+>
+> ```
+>     *
+>    **
+>   ***
+>  ****
+> *****
+> ```
+
+### 문제 접근 방식
+
+- 위 문제가 2348과 다른 부분은 딱 하나, 공백이 함께 입력된다는 점이다.
+- 그러므로 공백을 출력하는 for문 부분만 추가해주면 된다.
+- 공백의 개수는 각각 4, 3, 2, 1, 0개로, 이 값은 입력받은 값 a에서 바깥 for문의 i값을 뺀 값이다.
+- 그러므로 j라는 인수를 1부터 (a-1)의 값까지 반복시켜 공백 " "을 출력하게 하면 된다.
+
+
+

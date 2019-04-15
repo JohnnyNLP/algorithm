@@ -4,17 +4,32 @@ import java.util.Scanner;
 
 public class For {
 	
-	// 2438 별 찍기
+	// 2439 별 거꾸로 찍기
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		int a = scan.nextInt();
 		for (int i=1; i<=a; i++) {
-			for(int j=1; j<=i; j++) {
+			for(int j=1; j<=a-i; j++) {
+				System.out.print(" ");
+			}
+			for(int k=1; k<=i; k++) {
 				System.out.print("*");
 			}
 			System.out.println();
 		}
 	}
+	
+	// 2438 별 찍기
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int a = scan.nextInt();
+//		for (int i=1; i<=a; i++) {
+//			for(int j=1; j<=i; j++) {
+//				System.out.print("*");
+//			}
+//			System.out.println();
+//		}
+//	}
 	
 	// 2739 구구단 2단 출력하기
 //	public static void main(String[] args) {
