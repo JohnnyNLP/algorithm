@@ -4,20 +4,39 @@ import java.util.Scanner;
 
 public class For {
 	
-	// 2441 별 뒤집어 반대로 찍기
+	// 1924 날짜에서 요일 추출하기 (2007년)
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		int a = scan.nextInt();
-		for (int i=a; i>=1; i--) {
-			for(int j=1; j<=a-i; j++) {
-				System.out.print(" ");
-			}
-			for(int k=1; k<=i; k++) {
-				System.out.print("*");
-			}
-			System.out.println();
+		int month = scan.nextInt();
+		int day = scan.nextInt();
+		scan.close();
+		
+		int [] endDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		String [] weekDays = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
+		
+		int days = day;
+		for (int i = 0; i < month-1; i++) {
+			days += endDays[i];
 		}
+		System.out.println(weekDays[days%7]);
+		
 	}
+	
+	
+	// 2441 별 뒤집어 반대로 찍기
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int a = scan.nextInt();
+//		for (int i=a; i>=1; i--) {
+//			for(int j=1; j<=a-i; j++) {
+//				System.out.print(" ");
+//			}
+//			for(int k=1; k<=i; k++) {
+//				System.out.print("*");
+//			}
+//			System.out.println();
+//		}
+//	}
 	
 	// 2440 별 반대로 찍기
 //	public static void main(String[] args) {
