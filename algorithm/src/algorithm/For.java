@@ -1,19 +1,42 @@
 package algorithm;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
 public class For {
+
+	// 15552 빠른 A+B
+	public static void main(String[] args) {
+		try {
+			BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+			int testCount = Integer.parseInt(bf.readLine());
+			for (int i=1; i<=testCount; i++) {
+				StringTokenizer st = new StringTokenizer( bf.readLine() );
+				int a = Integer.parseInt(st.nextToken());
+				int b = Integer.parseInt(st.nextToken());
+				bw.write(Integer.toString(a+b)+"\n");
+			}
+			bw.flush();
+			bw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	// 11721 문자열 일부만 출력하기
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		String words = scan.next();
-		int token = words.length()/10;
-		for (int i = 0; i < token; i++) {
-			System.out.println(words.substring(i*10, i*10+10));
-		}
-		System.out.println(words.substring(token*10, words.length()));
-	}
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		String words = scan.next();
+//		int token = words.length()/10;
+//		for (int i = 0; i < token; i++) {
+//			System.out.println(words.substring(i*10, i*10+10));
+//		}
+//		System.out.println(words.substring(token*10, words.length()));
+//	}
 	
 	// 11720 주어진 숫자의 합 구하기
 //	public static void main(String[] args) {

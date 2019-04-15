@@ -157,6 +157,7 @@ public class Main {
 
 ```java
 import java.util.Scanner;
+
 public class Main {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
@@ -243,6 +244,8 @@ public class Main {
 - 다른 접근 방식
 
 ```java
+import java.util.Scanner;
+
 public class Main {
 	public static void main(String[] args) {
 		try {
@@ -321,4 +324,95 @@ public class Main {
 - 이 경우에 1일이 월요일이기 때문에 인덱스 번호와 요일 정보가 일치하게 된다.
 
 
+
+## #15552
+
+### 빠른 a+b 계산
+
+-  첫 줄에 테스트케이스의 개수 T가 주어진다. T는 최대 1,000,000이다. 다음 T줄에는 각각 두 정수 A와 B가 주어진다. A와 B는 1 이상, 1,000 이하이다.
+
+```java
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class Main {
+	public static void main(String[] args) {
+		try {
+			BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+			int testCount = Integer.parseInt(bf.readLine());
+			for (int i=1; i<=testCount; i++) {
+				StringTokenizer st = new StringTokenizer( bf.readLine() );
+				int a = Integer.parseInt(st.nextToken());
+				int b = Integer.parseInt(st.nextToken());
+				bw.write(Integer.toString(a+b)+"\n");
+			}
+			bw.flush();
+			bw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+```
+
+>```
+>5
+>1 1
+>12 34
+>5 500
+>40 60
+>1000 1000
+>```
+>
+>```
+>2
+>46
+>505
+>100
+>2000
+>```
+
+- 처음에 주어진 int 값을 count로 저장하고 이 횟수만큼 for문을 돌리면 되는 간단한 문제이다.
+
+- 그러나 지금까지 사용한 Scanner 객체는 메모리에 많은 부담을 주고, 그러므로 비교적 응답 시간이 오래 걸린다는 단점이 있다.
+
+- 그러므로 입력되는 자료가 많으면 많을수록 buffered 객체를 사용하는 것이 속도 면에서 더 나을 수 있다.
+
+```java
+for (int i=1; i<=testCount; i++) {
+				StringTokenizer st = new StringTokenizer( bf.readLine() );
+				int a = Integer.parseInt(st.nextToken());
+				int b = Integer.parseInt(st.nextToken());
+				bw.write(Integer.toString(a+b)+"\n");
+			}
+```
+
+- for 문 내부를 들여다보면 StringTokenizer를 사용한 부분이 인상적이다.
+- 기존에 scan.nextInt()로 입력받던 부분을 위와 같이 처리하는데, 먼저 줄 전체를 불러온 다음 nextToken() 메소드를 이용해 return받은 String을 다시 Integer로 변환하는 복잡한 과정을 거쳐야 한다.
+- 마찬가지로 bufferedWriter 객체 역시 String만 return할 수 있기  때문에 이를 다시 toString으로 변환해주어야 한다.
+- 여러모로 형변환이 잦고 익숙하지 않은 방식이었으나, scanner를 이용한 똑같은 코드는 시간 초과가 나오는 반면 buffered 객체를 이용한 경우 720ms로 평소보다 빠른 수행 결과를 얻을 수 있었다.
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int total = scan.nextInt();
+		for (int i = 1; i <= total; i++) {
+            int a = scan.nextInt();
+            int b = scan.nextInt();
+            System.out.println(a+b);
+		}
+    }
+}
+```
+
+> ![1555361079369](assets/1555361079369.png)
+>
+> 똑같은 결과를 냈지만 상반된 결과가 나타났다.
 
