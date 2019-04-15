@@ -4,8 +4,19 @@ import java.util.Scanner;
 
 public class For {
 	
-	// 1924 날짜에서 요일 추출하기 (2007년)
+	// 8393 자기 자신까지의 합 구하기
 	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int numb = scan.nextInt();
+		int sum = 0;
+		for (int i = 1; i <= numb; i ++){
+			sum += i;
+		}
+		System.out.println(sum);
+	}
+	
+	// 1924 날짜에서 요일 추출하기 (2007년)
+/*	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		int month = scan.nextInt();
 		int day = scan.nextInt();
@@ -20,7 +31,7 @@ public class For {
 		}
 		System.out.println(weekDays[days%7]);
 		
-	}
+	}*/
 	
 	
 	// 2441 별 뒤집어 반대로 찍기
