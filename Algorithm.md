@@ -415,3 +415,90 @@ public class Main {
 > ![1555361079369](assets/1555361079369.png)
 >
 > 똑같은 결과를 냈지만 상반된 결과가 나타났다.
+
+
+
+## #10817
+
+### 세 정수 중 두 번째로 큰 값 리턴하기
+
+- 세 정수 A, B, C가 주어진다. 이때, 두 번째로 큰 정수를 출력하는 프로그램을 작성하시오. 
+
+```java
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int A = scan.nextInt();
+		int B = scan.nextInt();
+		int C = scan.nextInt();
+		if (A>=B && A>=C) {
+			if (B>=C) {
+				System.out.println(B);
+			} else {
+                System.out.println(C);
+            }
+		} else if (A<=B && A<=C) {
+			if (B>=C) {
+				System.out.println(C);
+			} else {
+                System.out.println(B);
+            }
+		} else {
+			System.out.println(A);
+		}
+	}
+}
+```
+
+> ```
+> 20 30 10
+> 30 30 10
+> 40 40 40
+> 20 10 10
+> ```
+>
+> ```
+> 20
+> 30
+> 40
+> 10
+> ```
+
+
+
+### 문제 접근 방식
+
+```java
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		int A = scan.nextInt();
+		int B = scan.nextInt();
+		int C = scan.nextInt();
+		if (A>B && A>C) {
+			if (B>C) {
+				System.out.println(B);
+			}
+		} else if (A<B && A<C) {
+			if (B>C) {
+				System.out.println(C);
+			}
+		} else {
+			System.out.println(A);
+		}
+	}
+}
+```
+
+- 처음엔 다음과 같은 방식으로 생각해본다.
+- A를 기준으로 놓고, A가 가장 큰 경우와 가장 작은 경우를 생각한다.
+- A가 가장 크다면, B와 C중에 더 큰 값을 리턴하면 된다.
+- A가 가장 작다면, B와 C중에 작은 값을 리턴하면 된다.
+- 어느 쪽에도 속하지 않는다면, A를 리턴하면 된다.
+- 그런데 이 풀이의 오점은 A, B, C가 같은 값일 가능성을 열어두지 않았다는 점이다.
+  - 사실 그렇다 하더라도 마지막 else에 걸려 어차피 A가 출력되게 하면 상관 없다.
+- 진짜 문제는 내부 if문에서 else의 경우를 감안하지 않았다는 점이다.
+  - 이를 보완하였더니 문제가 간단히 해결되었다.
