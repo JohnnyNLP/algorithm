@@ -1,41 +1,86 @@
 package algorithm;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
 public class If {
 	
 	//1110 더하기 사이클
+	//Buffered 객체 사용 시 응답 시간 : 68 ms
 	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		int origin = scan.nextInt();
-		int a = 0;
-		int b = 0;
-		if(origin/10 > 0) {
-			a = origin/10;
-			b = origin - a*10;
-		} else {
-			b = origin;
-		}
-		int c = a;
-		int d = b;
-		int temp = 0;
-		int count = 0;
-		
-		while (count == 0 || a != c || b != d) {
-			if (c+d >= 10) {
-				temp = c;
-				c = d;
-				d = temp+d-10;
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+			int origin = Integer.parseInt(br.readLine());
+			int a = 0;
+			int b = 0;
+			if(origin/10 > 0) {
+				a = origin/10;
+				b = origin - a*10;
 			} else {
-				temp = c;
-				c = d;
-				d = temp+d;
+				b = origin;
 			}
-			count += 1;
-		} // while end
-		System.out.println(count);
-		
+			int c = a;
+			int d = b;
+			int temp = 0;
+			int count = 0;
+			
+			while (count == 0 || a != c || b != d) {
+				if (c+d >= 10) {
+					temp = c;
+					c = d;
+					d = temp+d-10;
+				} else {
+					temp = c;
+					c = d;
+					d = temp+d;
+				}
+				count += 1;
+			} // while end
+			bw.write(Integer.toString(count));
+			bw.flush();
+			bw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+	
+	//1110 더하기 사이클
+	//Scanner 객체 사용 시 응답 시간 : 104 ms
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int origin = scan.nextInt();
+//		int a = 0;
+//		int b = 0;
+//		if(origin/10 > 0) {
+//			a = origin/10;
+//			b = origin - a*10;
+//		} else {
+//			b = origin;
+//		}
+//		int c = a;
+//		int d = b;
+//		int temp = 0;
+//		int count = 0;
+//		
+//		while (count == 0 || a != c || b != d) {
+//			if (c+d >= 10) {
+//				temp = c;
+//				c = d;
+//				d = temp+d-10;
+//			} else {
+//				temp = c;
+//				c = d;
+//				d = temp+d;
+//			}
+//			count += 1;
+//		} // while end
+//		System.out.println(count);
+//		
+//	}
 	
 	//4344 평균은 넘겠지
 //	public static void main(String[] args) {
