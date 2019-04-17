@@ -1,46 +1,75 @@
 package algorithm;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class If {
 	
-	//4344 평균은 넘겠지
+	//1110 더하기 사이클
 	public static void main(String[] args) {
-		try {
-			BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-			int count = Integer.parseInt(bf.readLine());
-			
-			// 외부 for문 
-			for (int i=1; i<=count; i++) {
-				StringTokenizer st = new StringTokenizer(bf.readLine());
-				int innerCount = Integer.parseInt(st.nextToken());
-				int[] group = new int[innerCount];
-				int sum = 0;
-				// 내부 for문
-				for (int j=0; j<innerCount; j++) {
-					group[j] = Integer.parseInt(st.nextToken());
-					sum += group[j];
-					}
-				int avg = sum/innerCount;
-				int check = 0;
-				for (int k : group) {
-					if(Integer.compare(k, avg) > 0) {
-						check += 1;
-					}
-				} // 내부 for문 end
-				bw.write(String.format("%.3f", check*100.000/innerCount)+"%\n");	
-			} // 외부 for문 end
-			bw.flush();
-			bw.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		Scanner scan = new Scanner(System.in);
+		int origin = scan.nextInt();
+		int a = 0;
+		int b = 0;
+		if(origin/10 > 0) {
+			a = origin/10;
+			b = origin - a*10;
+		} else {
+			b = origin;
 		}
+		int c = a;
+		int d = b;
+		int temp = 0;
+		int count = 0;
+		
+		while (count == 0 || a != c || b != d) {
+			if (c+d >= 10) {
+				temp = c;
+				c = d;
+				d = temp+d-10;
+			} else {
+				temp = c;
+				c = d;
+				d = temp+d;
+			}
+			count += 1;
+		} // while end
+		System.out.println(count);
+		
 	}
+	
+	//4344 평균은 넘겠지
+//	public static void main(String[] args) {
+//		try {
+//			BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+//			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//			int count = Integer.parseInt(bf.readLine());
+//			
+//			// 외부 for문 
+//			for (int i=1; i<=count; i++) {
+//				StringTokenizer st = new StringTokenizer(bf.readLine());
+//				int innerCount = Integer.parseInt(st.nextToken());
+//				int[] group = new int[innerCount];
+//				int sum = 0;
+//				// 내부 for문
+//				for (int j=0; j<innerCount; j++) {
+//					group[j] = Integer.parseInt(st.nextToken());
+//					sum += group[j];
+//					}
+//				int avg = sum/innerCount;
+//				int check = 0;
+//				for (int k : group) {
+//					if(Integer.compare(k, avg) > 0) {
+//						check += 1;
+//					}
+//				} // 내부 for문 end
+//				bw.write(String.format("%.3f", check*100.000/innerCount)+"%\n");	
+//			} // 외부 for문 end
+//			bw.flush();
+//			bw.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	//1547 점수 조작하기 2
 	//Scanner 객체 사용 시 응답 시간 : 160 ms
