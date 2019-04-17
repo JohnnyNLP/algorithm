@@ -16,16 +16,16 @@ public class Functions {
 		}
 		
 		for(int i = 0; i < list.size(); i ++) {
-			temp = list.get(i);
-			while (temp <= 10000) {
-				num = temp;
+			num = list.get(i);
+			while (num <= 10000) {
+				temp = num;
 				sum = 0;
-				while(num!=0) {
-					sum += num%10;
-					num /= 10;
+				while(temp!=0) {
+					sum += temp%10;
+					temp /= 10;
 				}
-				temp = temp + sum;
-				list.remove((Integer) temp);
+				num = num + sum;
+				list.remove((Integer) num);
 			}
 		}
 		
