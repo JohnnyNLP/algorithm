@@ -1,28 +1,65 @@
 package algorithm;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
 public class If {
 	
+	//4344 평균은 넘겠지
+	public static void main(String[] args) {
+		try {
+			BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+			int count = Integer.parseInt(bf.readLine());
+			
+			// 외부 for문 
+			for (int i=1; i<=count; i++) {
+				StringTokenizer st = new StringTokenizer(bf.readLine());
+				int innerCount = Integer.parseInt(st.nextToken());
+				int[] group = new int[innerCount];
+				int sum = 0;
+				// 내부 for문
+				for (int j=0; j<innerCount; j++) {
+					group[j] = Integer.parseInt(st.nextToken());
+					sum += group[j];
+					}
+				int avg = sum/innerCount;
+				int check = 0;
+				for (int k : group) {
+					if(Integer.compare(k, avg) > 0) {
+						check += 1;
+					}
+				} // 내부 for문 end
+				bw.write(String.format("%.3f", check*100.000/innerCount)+"%\n");	
+			} // 외부 for문 end
+			bw.flush();
+			bw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	//1547 점수 조작하기 2
 	//Scanner 객체 사용 시 응답 시간 : 160 ms
-	public static void main(String[] args) {
-		
-		Scanner scan = new Scanner(System.in);
-        int count = scan.nextInt();
-        int [] grades = new int[count];
-        for(int i=0; i<count; i++) {
-            grades[i] = scan.nextInt();
-        }
-        Arrays.sort(grades);
-        double M = grades[grades.length-1];
-        double sum = 0;
-        for(int i=0; i<count; i++) {
-            sum += grades[i]/M*100;
-        }
-        System.out.println(sum/count);
-	}
+//	public static void main(String[] args) {
+//		
+//		Scanner scan = new Scanner(System.in);
+//        int count = scan.nextInt();
+//        int [] grades = new int[count];
+//        for(int i=0; i<count; i++) {
+//            grades[i] = scan.nextInt();
+//        }
+//        Arrays.sort(grades);
+//        double M = grades[grades.length-1];
+//        double sum = 0;
+//        for(int i=0; i<count; i++) {
+//            sum += grades[i]/M*100;
+//        }
+//        System.out.println(sum/count);
+//	}
 	
 	//1547 점수 조작하기 1
 	//Buffered 객체 사용 시 응답 시간 : 84 ms
