@@ -3,32 +3,47 @@ package algorithm;
 import java.util.Scanner;
 
 public class Array {
-	
-	//2920 À½°è
+
+	//10039 Æò±Õ Á¡¼ö
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		int[] array = new int[8];
-		for (int i = 0; i <= 7; i ++) {
-			array[i] = scan.nextInt();
+		int temp;
+		int sum = 0;
+		for(int i = 0; i<5; i++) {
+			temp = scan.nextInt();
+			if (temp <40) {
+				temp = 40;
+			}
+			sum += temp;
 		}
-		int temp = 0;
-		
-		for (int i =0; i <7; i++) {
-			if (array[i+1] > array[i]) {
-				temp += 1;
-			} else if (array[i+1] < array[i]) {
-				temp -= 1;
-			}			
-		}
-		
-		if (temp == 7) {
-			System.out.println("ascending");
-		} else if (temp == -7) {
-			System.out.println("descending");
-		} else {
-			System.out.println("mixed");
-		}
+		System.out.println(sum/5);
 	}
+	
+	//2920 À½°è
+//	public static void main(String[] args) {
+//		Scanner scan = new Scanner(System.in);
+//		int[] array = new int[8];
+//		for (int i = 0; i <= 7; i ++) {
+//			array[i] = scan.nextInt();
+//		}
+//		int temp = 0;
+//		
+//		for (int i =0; i <7; i++) {
+//			if (array[i+1] > array[i]) {
+//				temp += 1;
+//			} else if (array[i+1] < array[i]) {
+//				temp -= 1;
+//			}			
+//		}
+//		
+//		if (temp == 7) {
+//			System.out.println("ascending");
+//		} else if (temp == -7) {
+//			System.out.println("descending");
+//		} else {
+//			System.out.println("mixed");
+//		}
+//	}
 	
 	//8958 OX ÄûÁî
 //	public static void main(String[] args) throws Exception{
