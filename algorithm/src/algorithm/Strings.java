@@ -8,23 +8,44 @@ import java.util.StringTokenizer;
 
 public class Strings {
 	
-	//2908 거꾸로 숫자 크기 비교
+	//2675 문자열 반복
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		int A = Integer.parseInt(st.nextToken());
-		int B = Integer.parseInt(st.nextToken());
-		int a = (A/100) + ((A%100)-(A%10)) + (A%10)*100;
-		int b = (B/100) + ((B%100)-(B%10)) + (B%10)*100;
-		if (a>b) {
-			bw.write(Integer.toString(a));
-		} else {
-			bw.write(Integer.toString(b));
+		int count = Integer.parseInt(br.readLine());
+		for(int i=1; i <= count; i ++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int repeat = Integer.parseInt(st.nextToken());
+			String word = st.nextToken();
+			for(int j=0; j<=word.length()-1; j++) {
+				String temp = Character.toString(word.charAt(j));
+				for(int k=1; k<=repeat; k++) {
+					bw.write(temp);					
+				}
+			}
+			bw.write("\n");
 		}
 		bw.flush();
 		bw.close();
 	}
+	
+	//2908 거꾸로 숫자 크기 비교
+//	public static void main(String[] args) throws Exception {
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//		StringTokenizer st = new StringTokenizer(br.readLine());
+//		int A = Integer.parseInt(st.nextToken());
+//		int B = Integer.parseInt(st.nextToken());
+//		int a = (A/100) + ((A%100)-(A%10)) + (A%10)*100;
+//		int b = (B/100) + ((B%100)-(B%10)) + (B%10)*100;
+//		if (a>b) {
+//			bw.write(Integer.toString(a));
+//		} else {
+//			bw.write(Integer.toString(b));
+//		}
+//		bw.flush();
+//		bw.close();
+//	}
 	
 	
 	//1316 그룹 단어 체크
