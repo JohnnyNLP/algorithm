@@ -14,7 +14,7 @@ public class BufferedInstance {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 			String blah = br.readLine();
 			
-			// ¿€º∫∫Œ
+			// ÏûëÏÑ±Î∂Ä
 			
 			bw.write(blah);
 			bw.flush();
@@ -25,15 +25,15 @@ public class BufferedInstance {
 
 	}
 	
-	// »§¿∫
+	// ÌòπÏùÄ
 	
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		String blah = br.readLine();
-		
-		bw.write(blah);
-		bw.flush();
-		bw.close();
-	}
+//	public static void main(String[] args) throws IOException {
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//		String blah = br.readLine();
+//		
+//		bw.write(blah);
+//		bw.flush();
+//		bw.close();
+//	}
 }
