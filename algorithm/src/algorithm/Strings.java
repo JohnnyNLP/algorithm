@@ -4,33 +4,52 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Strings {
 	
-	//1316 그룹 단어 체크
+	//2908 거꾸로 숫자 크기 비교
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int wordCount = Integer.parseInt(br.readLine());
-		int resultCount = 0;
-		
-		for(int i=1; i<=wordCount; i++) {
-			String word = br.readLine();
-			int[] alphabets = new int [26];
-			for(int j=0; j<word.length(); j++) {
-				alphabets[word.charAt(j)-97] += 1;
-				if(alphabets[word.charAt(j)-97] >= 2 && word.charAt(j-1) != word.charAt(j)) {
-						break;
-				} else if (j == word.length()-1) {
-					resultCount += 1;					
-				}
-			}
-		}		
-		bw.write(Integer.toString(resultCount));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int A = Integer.parseInt(st.nextToken());
+		int B = Integer.parseInt(st.nextToken());
+		int a = (A/100) + ((A%100)-(A%10)) + (A%10)*100;
+		int b = (B/100) + ((B%100)-(B%10)) + (B%10)*100;
+		if (a>b) {
+			bw.write(Integer.toString(a));
+		} else {
+			bw.write(Integer.toString(b));
+		}
 		bw.flush();
 		bw.close();
 	}
+	
+	
+	//1316 그룹 단어 체크
+//	public static void main(String[] args) throws Exception {
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//		int wordCount = Integer.parseInt(br.readLine());
+//		int resultCount = 0;
+//		
+//		for(int i=1; i<=wordCount; i++) {
+//			String word = br.readLine();
+//			int[] alphabets = new int [26];
+//			for(int j=0; j<word.length(); j++) {
+//				alphabets[word.charAt(j)-97] += 1;
+//				if(alphabets[word.charAt(j)-97] >= 2 && word.charAt(j-1) != word.charAt(j)) {
+//						break;
+//				} else if (j == word.length()-1) {
+//					resultCount += 1;					
+//				}
+//			}
+//		}		
+//		bw.write(Integer.toString(resultCount));
+//		bw.flush();
+//		bw.close();
+//	}
 
 	//1157 많이 사용된 알파벳 찾기
 //	public static void main(String[] args) throws Exception{
