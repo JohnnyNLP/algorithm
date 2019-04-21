@@ -8,26 +8,56 @@ import java.util.StringTokenizer;
 
 public class Strings {
 	
-	//2675 문자열 반복
+	//5622 다이얼 돌리기
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int count = Integer.parseInt(br.readLine());
-		for(int i=1; i <= count; i ++) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			int repeat = Integer.parseInt(st.nextToken());
-			String word = st.nextToken();
-			for(int j=0; j<=word.length()-1; j++) {
-				String temp = Character.toString(word.charAt(j));
-				for(int k=1; k<=repeat; k++) {
-					bw.write(temp);					
-				}
-			}
-			bw.write("\n");
+		String word = br.readLine();
+		int temp = 0;
+		for(int i=0; i<word.length(); i++) {
+			if(word.charAt(i) >= 87) {
+				temp += 10;
+			} else if(word.charAt(i) >= 84) {
+				temp += 9;
+			} else if(word.charAt(i) >= 80) {
+				temp += 8;
+			} else if(word.charAt(i) >= 77) {
+				temp += 7;
+			} else if(word.charAt(i) >= 74) {
+				temp += 6;
+			} else if(word.charAt(i) >= 71) {
+				temp += 5;
+			} else if(word.charAt(i) >= 68) {
+				temp += 4;
+			} else {
+				temp += 3;
+			} 
 		}
+		bw.write(Integer.toString(temp));
 		bw.flush();
 		bw.close();
 	}
+	
+	//2675 문자열 반복
+//	public static void main(String[] args) throws Exception {
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//		int count = Integer.parseInt(br.readLine());
+//		for(int i=1; i <= count; i ++) {
+//			StringTokenizer st = new StringTokenizer(br.readLine());
+//			int repeat = Integer.parseInt(st.nextToken());
+//			String word = st.nextToken();
+//			for(int j=0; j<=word.length()-1; j++) {
+//				String temp = Character.toString(word.charAt(j));
+//				for(int k=1; k<=repeat; k++) {
+//					bw.write(temp);					
+//				}
+//			}
+//			bw.write("\n");
+//		}
+//		bw.flush();
+//		bw.close();
+//	}
 	
 	//2908 거꾸로 숫자 크기 비교
 //	public static void main(String[] args) throws Exception {
