@@ -4,39 +4,68 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.StringTokenizer;
 
 public class Strings {
 	
-	//5622 다이얼 돌리기
+	//2941 크로아티아 알파벳
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		String word = br.readLine();
-		int temp = 0;
-		for(int i=0; i<word.length(); i++) {
-			if(word.charAt(i) >= 87) {
-				temp += 10;
-			} else if(word.charAt(i) >= 84) {
-				temp += 9;
-			} else if(word.charAt(i) >= 80) {
-				temp += 8;
-			} else if(word.charAt(i) >= 77) {
-				temp += 7;
-			} else if(word.charAt(i) >= 74) {
-				temp += 6;
-			} else if(word.charAt(i) >= 71) {
-				temp += 5;
-			} else if(word.charAt(i) >= 68) {
-				temp += 4;
-			} else {
-				temp += 3;
-			} 
+		
+		for (int i = 1; i <= word.length(); i++) {
+			if (word.contains("c=")) {
+				word = word.replace("c=", "1");
+			} else if (word.contains("c-")) {
+				word = word.replace("c-", "2");
+			} else if (word.contains("dz=")) {
+				word = word.replace("dz=", "3");
+			} else if (word.contains("d-")) {
+				word = word.replace("d-", "4");
+			} else if (word.contains("lj")) {
+				word = word.replace("lj", "5");
+			} else if (word.contains("nj")) {
+				word = word.replace("nj", "6");
+			} else if (word.contains("s=")) {
+				word = word.replace("s=", "7");
+			} else if (word.contains("z=")) {
+				word = word.replace("z=", "8");
+			}
 		}
-		bw.write(Integer.toString(temp));
+		bw.write(Integer.toString(word.length()));
 		bw.flush();
 		bw.close();
 	}
+	
+	//5622 다이얼 돌리기
+//	public static void main(String[] args) throws Exception {
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//		String word = br.readLine();
+//		int temp = 0;
+//		for(int i=0; i<word.length(); i++) {
+//			if(word.charAt(i) >= 87) {
+//				temp += 10;
+//			} else if(word.charAt(i) >= 84) {
+//				temp += 9;
+//			} else if(word.charAt(i) >= 80) {
+//				temp += 8;
+//			} else if(word.charAt(i) >= 77) {
+//				temp += 7;
+//			} else if(word.charAt(i) >= 74) {
+//				temp += 6;
+//			} else if(word.charAt(i) >= 71) {
+//				temp += 5;
+//			} else if(word.charAt(i) >= 68) {
+//				temp += 4;
+//			} else {
+//				temp += 3;
+//			} 
+//		}
+//		bw.write(Integer.toString(temp));
+//		bw.flush();
+//		bw.close();
+//	}
 	
 	//2675 문자열 반복
 //	public static void main(String[] args) throws Exception {
