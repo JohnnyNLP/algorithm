@@ -24,4 +24,16 @@ public class BufferedInstance {
 		}
 
 	}
+	
+	// È¤Àº
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		String blah = br.readLine();
+		
+		bw.write(blah);
+		bw.flush();
+		bw.close();
+	}
 }
