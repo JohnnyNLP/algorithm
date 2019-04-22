@@ -27,7 +27,7 @@ public class BufferedInstance {
 	
 	// 혹은
 	
-//	public static void main(String[] args) throws IOException {
+//	public static void main(String[] args) throws Exception {
 //		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 //		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 //		String blah = br.readLine();
