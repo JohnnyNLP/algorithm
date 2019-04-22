@@ -8,19 +8,18 @@ import java.util.StringTokenizer;
 
 public class FindRule {
 	
-	//1011 알파 센타우리 풀이 B
+	//1011 알파 센타우리 풀이 B (int -> long으로 바꾸니 해결)
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		int repeat = Integer.parseInt(br.readLine());
-		int x, y, distance;
-		int n, k, set, temp;
+		long x, y, distance;
+		long n, k, set;
 		
 		for (int i=1; i <= repeat; i++) {
 			n = 2;
 			k = 4;
 			set = 1;
-			temp = 1;
 			
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			x = Integer.parseInt(st.nextToken());
@@ -31,13 +30,12 @@ public class FindRule {
 				n += k;
 				k += 2;
 				set += 2;
-				temp ++;
 			}
 			
-			if(distance > Math.pow(temp, 2)) {
+			if(distance > n - (k-2)/2) {
 				set ++;
 			}
-			bw.append(Integer.toString(set)+"\n");
+			bw.append(Long.toString(set)+"\n");
 		}
 		bw.flush();
 		bw.close();
