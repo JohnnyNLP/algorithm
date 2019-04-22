@@ -750,3 +750,175 @@ list.remove((Integer) num);
 
 - 이때 인자 앞에 **(Integer)**를 적어서 명시적 형변환을 해주면 우리가 원하는 대로 해당 값과 일치하는 원소를 지우게 된다.
 
+
+
+## #1011
+
+### 알파 센타우리
+
+- 우현이는 어린 시절, 지구 외의 다른 행성에서도 인류들이 살아갈 수 있는 미래가 오리라 믿었다. 그리고 그가 지구라는 세상에 발을 내려 놓은 지 23년이 지난 지금, 세계 최연소 ASNA 우주 비행사가 되어 새로운 세계에 발을 내려 놓는 영광의 순간을 기다리고 있다.
+
+  그가 탑승하게 될 우주선은 Alpha Centauri라는 새로운 인류의 보금자리를 개척하기 위한 대규모 생활 유지 시스템을 탑재하고 있기 때문에, 그 크기와 질량이 엄청난 이유로 최신기술력을 총 동원하여 개발한 공간이동 장치를 탑재하였다. 하지만 이 공간이동 장치는 이동 거리를 급격하게 늘릴 경우 기계에 심각한 결함이 발생하는 단점이 있어서, 이전 작동시기에 k광년을 이동하였을 때는 k-1 , k 혹은 k+1 광년만을 다시 이동할 수 있다. 예를 들어, 이 장치를 처음 작동시킬 경우 -1 , 0 , 1 광년을 이론상 이동할 수 있으나 사실상 음수 혹은 0 거리만큼의 이동은 의미가 없으므로 1 광년을 이동할 수 있으며, 그 다음에는 0 , 1 , 2 광년을 이동할 수 있는 것이다. ( 여기서 다시 2광년을 이동한다면 다음 시기엔 1, 2, 3 광년을 이동할 수 있다. )
+
+  김우현은 공간이동 장치 작동시의 에너지 소모가 크다는 점을 잘 알고 있기 때문에 x지점에서 y지점을 향해 최소한의 작동 횟수로 이동하려 한다. 하지만 y지점에 도착해서도 공간 이동장치의 안전성을 위하여 y지점에 도착하기 바로 직전의 이동거리는 반드시 1광년으로 하려 한다.
+
+  김우현을 위해 x지점부터 정확히 y지점으로 이동하는데 필요한 공간 이동 장치 작동 횟수의 최솟값을 구하는 프로그램을 작성하라.
+
+
+
+### 풀이 A
+
+```java
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class Main {	
+	//1011 알파 센타우리 풀이 A (시간 초과)
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int repeat = Integer.parseInt(br.readLine());
+		int x, y, distance;
+	
+		for (int i=1; i<=repeat; i++) {
+			int count = 0;
+			int come = 1;
+			int go = 1;
+			int location = 0;
+
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			x = Integer.parseInt(st.nextToken());
+			y = Integer.parseInt(st.nextToken());
+			distance = y-x;
+			
+			while(location < distance) {
+				location += come;
+				come += 1;
+				count += 1;
+				if(location < distance) {
+					location += go;
+					go += 1;
+					count += 1;
+				} else break; 
+			}
+			bw.append(Integer.toString(count)+"\n");			
+		}
+		bw.flush();
+		bw.close();
+	}
+}
+```
+
+> ```
+> 3
+> 0 3
+> 1 5
+> 45 50
+> ```
+>
+> ```
+> 3
+> 3
+> 4
+> ```
+
+- 먼저 생각해볼 것은 우주선이 속도를 항상 1씩만 증가시키거나 감소시킬 수 있다는 점이다.
+- 따라서 시작할 때의 속력과 도착할 때의 속력은 1로 고정되어있고, 그 다음/전의 속력 역시 1이거나 2여야 한다.
+- 우주선이 n번 작동한다고 했을 때 움직일 수 있는 거리는 다음과 같다.
+
+>1번 : 1 (1 광년)
+>
+>2번 : 1 1 (2 광년)
+>
+>3번 : 1 1 1 // 1 2 1 (3, 4 광년)
+>
+>4번 : 1 1 2 1 // 1 2 2 1 (5, 6 광년)
+>
+>5번 : 1 2 2 1 1 // 1 2 2 2 1 // 1 2 3 2 1 (7, 8, 9 광년)
+>
+>6번 : 1 2 2 2 2 1 // 1 2 2 2 3 2 1 // 1 2 2 3 3 2 1 // 1 2 3 3 3 2 1 (10, 11, 12, 13 광년)
+
+- 이때 알아낼 수 있는 규칙은 다음과 같다.
+  - 왼쪽 끝과 오른쪽 끝의 속력(각각 come/go)은 항상 1이다.
+  - 그 다음번 속력은 각각 2가 되는데, 이때 홀수 번이라면 come만, 짝수 번이라면 go까지 더해주면 된다.
+  - 이때 come/go의 값이 변화할 때마다 count(이동 횟수)를 증가시켜준다.
+  - 이렇게 더해진 좌표값(location)은 실제 거리(distance)보다 커질 수 있다.
+    - ex) 실제 거리는 5광년인데 1 2 2 1로 이동한 것으로 계산된다.
+  - 그러나 우리는 항상 최단거리로 움직이기 때문에 더 많이 이동했다해도 횟수에는 지장이 없다.
+- location이 가질 수 있는 값은 최단거리로 이동할 수 있는 최대 거리이다. 따라서 distance와 같을 수도, 더 클수도 있다.
+- come과 go를 각각 다른 변수로 할당해준 이유는 횟수가 +1회 증가할 때마다 이동 거리는 +1, +1, +2, +2, +3, +3과 같은 규칙으로 격번마다 증가하기 때문이다.
+- 따라서 while문 하나에서 진행하게 하되, 내부에 if문을 두어 짝수 번에 같은 값을 한번 더 더해주는 처리를 하였다.
+
+
+
+### 풀이 B
+
+- 위 풀이는 답은 맞출 수 있었지만 시간 초과가 나왔다. 따라서 두 번째는 조금 다른 접근 방식을 취했다.
+
+```java
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class Main {
+	
+	//1011 알파 센타우리 풀이 B (int -> long으로 바꾸니 해결)
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int repeat = Integer.parseInt(br.readLine());
+		long x, y, distance;
+		long n, k, set;
+		
+		for (int i=1; i <= repeat; i++) {
+			n = 2;
+			k = 4;
+			set = 1;
+			
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			x = Integer.parseInt(st.nextToken());
+			y = Integer.parseInt(st.nextToken());
+			distance = y-x;
+			
+			while(distance > n) {
+				n += k;
+				k += 2;
+				set += 2;
+			}
+			
+			if(distance > n - (k-2)/2) {
+				set ++;
+			}
+			bw.append(Long.toString(set)+"\n");
+		}
+		bw.flush();
+		bw.close();
+	}
+}
+```
+
+- 위 풀이에서는 앞서 +1, +1처럼 같은 간격으로 증가하는 홀수/짝수번째 회차를 하나로 묶어 set이라는 변수로 count했다.
+- 즉, set은 (1-2회)일 때 1, (3-4회)일때 3의 값을 가진다.
+- 이때 각 set의 경계값을 n으로, 경계값의 증가폭을 k로 둔다.
+- 각 set별 변수의 증감표는 다음과 같다.
+
+| n    | k    | set  | 실제 이동 거리 |
+| ---- | ---- | ---- | -------------- |
+| 2    | 4    | 1    | 1 - 2 광년     |
+| 6    | 6    | 3    | 3 - 6 광년     |
+| 12   | 8    | 5    | 7 - 12 광년    |
+| 20   | 10   | 7    | 13 - 20 광년   |
+| 30   | 12   | 9    | 20 - 30 광년   |
+
+- distance를 기준으로 distance가 n을 넘어서는 지점까지 위 규칙에 따라 while문을 진행하면, distance가 속한 set 그룹이 나온다.
+- 이제 남은 것은 set 안에서 홀수번/짝수번을 가르는 것이다.
+- 만약 5번 set에 distance가 포함되어 있다면 distance는 7 이상 12 이하의 값이다.
+- 이때 distance가 9보다 크면 6번, 아니면 5번이다.
+- 즉, 이때의 9라는 값을 얻어낼 수 있다면 if 문에 적용하여 set에 1을 더하여 짝수번으로 만들어줄 수 있다.
+- n에서 (k-2)/2를 뺀 값이 그 경계값이 된다.
+
