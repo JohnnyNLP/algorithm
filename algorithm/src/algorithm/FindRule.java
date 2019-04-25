@@ -5,39 +5,91 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class FindRule {
 	
-	//1475 방번호
+	//6064 카잉 달력
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		String roomNum = br.readLine();
-		int[] numbs = new int [9];
-		int set = 0;
-				
-		for(int i=0; i<roomNum.length(); i++) {
-			int x = roomNum.charAt(i)-48;
-			if (x == 9) {
-				x -= 3;
-			}
-			
-			if(numbs[x] == 0) {
-				for(int k=0; k<=8; k++) {
-					numbs[k]++;
-				}
-				numbs[6]++;
-				set ++;
-			}
-			
-			numbs[x] -= 1;
-		}
+		int repeat = Integer.parseInt(br.readLine());
 		
-		bw.write(Integer.toString(set));
+		for (int i=1; i<=repeat; i++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int M = Integer.parseInt(st.nextToken());
+			int N = Integer.parseInt(st.nextToken());
+			int x = Integer.parseInt(st.nextToken());
+			int y = Integer.parseInt(st.nextToken());
+			
+			int limit = lcm(M,N);
+			int result = -1;
+			int[] xChecker = new int[limit/M];
+			int yTemp = y;
+			
+			for (int j=0; j<limit/M; j++ ) {
+				xChecker[j] = x+M*j;
+			}
+			
+			Arrays.sort(xChecker);
+			
+			while(yTemp <= limit) {
+				if(Arrays.binarySearch(xChecker, yTemp) >= 0) {
+					result = yTemp;
+					break;
+				} else {
+					yTemp += N; 
+				}
+			}
+			bw.append(Integer.toString(result)+"\n");
+		}
 		bw.flush();
 		bw.close();
 	}
 	
+	public static int lcm (int M, int N) {
+		int big=M, small=N, r=1;
+		if(M < N) {
+			big = N;
+			small = M;
+		}
+		while (r>0){
+			r =  big % small;
+			big = small;
+			small = r;
+		}
+		return M*N/big;
+	}
+	
+	//1475 방번호
+//	public static void main(String[] args) throws Exception {
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//		String roomNum = br.readLine();
+//		int[] numbs = new int [9];
+//		int set = 0;
+//				
+//		for(int i=0; i<roomNum.length(); i++) {
+//			int x = roomNum.charAt(i)-48;
+//			if (x == 9) {
+//				x -= 3;
+//			}
+//			
+//			if(numbs[x] == 0) {
+//				for(int k=0; k<=8; k++) {
+//					numbs[k]++;
+//				}
+//				numbs[6]++;
+//				set ++;
+//			}
+//			
+//			numbs[x] -= 1;
+//		}
+//		
+//		bw.write(Integer.toString(set));
+//		bw.flush();
+//		bw.close();
+//	}
 	
 	//2775 부녀회장
 //	public static void main(String[] args) throws Exception {
