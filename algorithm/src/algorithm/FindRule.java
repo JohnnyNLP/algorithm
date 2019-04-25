@@ -4,35 +4,67 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 
 public class FindRule {
 	
-	//2775 부녀회장
+	//1475 방번호
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int repeat = Integer.parseInt(br.readLine());
-		for (int i=1; i<=repeat; i++) {
-			int k = Integer.parseInt(br.readLine());
-			int n = Integer.parseInt(br.readLine());
-			
-			int[][] apartment = new int[k+1][n];
-			for(int j=0; j<n; j++) {
-				apartment[0][j] = j+1;
+		String roomNum = br.readLine();
+		int[] numbs = new int [9];
+		int set = 0;
+				
+		for(int i=0; i<roomNum.length(); i++) {
+			int x = roomNum.charAt(i)-48;
+			if (x == 9) {
+				x -= 3;
 			}
 			
-			for(int l=1; l<=k; l++) {
-				for(int m=0; m<n; m++) {
-					for(int o=0; o<=m; o++) {
-						apartment[l][m] += apartment[l-1][o];						
-					}
+			if(numbs[x] == 0) {
+				for(int k=0; k<=8; k++) {
+					numbs[k]++;
 				}
+				numbs[6]++;
+				set ++;
 			}
-			bw.append(Integer.toString(apartment[k][n-1])+"\n");
+			
+			numbs[x] -= 1;
 		}
+		
+		bw.write(Integer.toString(set));
 		bw.flush();
 		bw.close();
 	}
+	
+	
+	//2775 부녀회장
+//	public static void main(String[] args) throws Exception {
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//		int repeat = Integer.parseInt(br.readLine());
+//		for (int i=1; i<=repeat; i++) {
+//			int k = Integer.parseInt(br.readLine());
+//			int n = Integer.parseInt(br.readLine());
+//			
+//			int[][] apartment = new int[k+1][n];
+//			for(int j=0; j<n; j++) {
+//				apartment[0][j] = j+1;
+//			}
+//			
+//			for(int l=1; l<=k; l++) {
+//				for(int m=0; m<n; m++) {
+//					for(int o=0; o<=m; o++) {
+//						apartment[l][m] += apartment[l-1][o];						
+//					}
+//				}
+//			}
+//			bw.append(Integer.toString(apartment[k][n-1])+"\n");
+//		}
+//		bw.flush();
+//		bw.close();
+//	}
 	
 	//10250 AMC 호텔
 //	public static void main(String[] args) throws Exception {
