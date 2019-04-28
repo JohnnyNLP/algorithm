@@ -5,38 +5,70 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
+
 
 public class PrimeNumber {
 	
-	//1929 소수 구하기
+	//4948 베르트랑 공준
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		int x = Integer.parseInt(st.nextToken());
-		int y = Integer.parseInt(st.nextToken());
+		int num;
 		
-		ArrayList<Boolean> list = new ArrayList (y+1);
-		list.add(false);
-		list.add(false);
-		for(int i=2; i<=y; i++) list.add(i, true);
+		while (true) {
+			num = Integer.parseInt(br.readLine());
+			if(num == 0) break;
+			int count = 0;
+			ArrayList<Boolean> list = new ArrayList (2*num+1);
+			list.add(false);
+			list.add(false);
+			for(int i=2; i<=2*num; i++) list.add(i, true);
+		
+			for(int i=2; i<=2*num; i++) {
+				if(list.get(i)) {
+					for(int j=2; j*i<=2*num; j++) {
+						list.set(j*i, false);
+					}
+				} else continue;
+			}
 	
-		for(int i=2; i<=y; i++) {
-			if(list.get(i)) {
-				for(int j=2; j*i<=y; j++) {
-					list.set(j*i, false);
-				}
-			} else continue;
+			for(int i=num+1; i<=2*num; i++) {
+				if(list.get(i)) count++;
+			}
+			bw.append(Integer.toString(count)+"\n");
 		}
-
-		for(int i=x; i<=y; i++) {
-			if(list.get(i)) bw.append(Integer.toString(i)+"\n");
-		}
-	
 		bw.flush();
 		bw.close();
 	}
+	
+	//1929 소수 구하기
+//	public static void main(String[] args) throws Exception {
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//		StringTokenizer st = new StringTokenizer(br.readLine());
+//		int x = Integer.parseInt(st.nextToken());
+//		int y = Integer.parseInt(st.nextToken());
+//		
+//		ArrayList<Boolean> list = new ArrayList (y+1);
+//		list.add(false);
+//		list.add(false);
+//		for(int i=2; i<=y; i++) list.add(i, true);
+//	
+//		for(int i=2; i<=y; i++) {
+//			if(list.get(i)) {
+//				for(int j=2; j*i<=y; j++) {
+//					list.set(j*i, false);
+//				}
+//			} else continue;
+//		}
+//
+//		for(int i=x; i<=y; i++) {
+//			if(list.get(i)) bw.append(Integer.toString(i)+"\n");
+//		}
+//	
+//		bw.flush();
+//		bw.close();
+//	}
 
 	//2581 소수 찾기 그룹
 //	public static void main(String[] args) throws Exception {
