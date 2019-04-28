@@ -5,57 +5,87 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class PrimeNumber {
-
-	//2581 소수 찾기 그룹
+	
+	//1929 소수 구하기
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int x = Integer.parseInt(br.readLine());
-		int y = Integer.parseInt(br.readLine());
-		ArrayList<Integer> list = new ArrayList();
-		int temp;
-		int sum = 0;
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int x = Integer.parseInt(st.nextToken());
+		int y = Integer.parseInt(st.nextToken());
 		
-		try {
-			for(int i=x; i<=y; i++) {
-				boolean checker = false;
-				
-				if (i==2 || i==3) {
-					list.add(i);
-					sum += i;
-					continue;
+		ArrayList<Boolean> list = new ArrayList (y+1);
+		list.add(false);
+		list.add(false);
+		for(int i=2; i<=y; i++) list.add(i, true);
+	
+		for(int i=2; i<=y; i++) {
+			if(list.get(i)) {
+				for(int j=2; j*i<=y; j++) {
+					list.set(j*i, false);
 				}
-
-				if (i==1 || i%2==0) {
-					continue;
-				} else {
-					temp = i/2;
-					for(int j=1; j<temp; j++) {
-						if(i%(2*j+1)==0) {
-							checker = true;
-							break;
-						}
-					}
-				}
-				
-				if (checker) continue;
-				else {
-					sum += i;
-					list.add(i);
-				}
-				
-			}
-			bw.write(sum+"\n"+list.get(0));
-			bw.flush();
-			bw.close();
-		} catch (IndexOutOfBoundsException e) {
-			bw.write("-1");
-			bw.flush();
-			bw.close();
+			} else continue;
 		}
+
+		for(int i=x; i<=y; i++) {
+			if(list.get(i)) bw.append(Integer.toString(i)+"\n");
+		}
+	
+		bw.flush();
+		bw.close();
 	}
+
+	//2581 소수 찾기 그룹
+//	public static void main(String[] args) throws Exception {
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//		int x = Integer.parseInt(br.readLine());
+//		int y = Integer.parseInt(br.readLine());
+//		ArrayList<Integer> list = new ArrayList();
+//		int temp;
+//		int sum = 0;
+//		
+//		try {
+//			for(int i=x; i<=y; i++) {
+//				boolean checker = false;
+//				
+//				if (i==2 || i==3) {
+//					list.add(i);
+//					sum += i;
+//					continue;
+//				}
+//
+//				if (i==1 || i%2==0) {
+//					continue;
+//				} else {
+//					temp = i/2;
+//					for(int j=1; j<temp; j++) {
+//						if(i%(2*j+1)==0) {
+//							checker = true;
+//							break;
+//						}
+//					}
+//				}
+//				
+//				if (checker) continue;
+//				else {
+//					sum += i;
+//					list.add(i);
+//				}
+//				
+//			}
+//			bw.write(sum+"\n"+list.get(0));
+//			bw.flush();
+//			bw.close();
+//		} catch (IndexOutOfBoundsException e) {
+//			bw.write("-1");
+//			bw.flush();
+//			bw.close();
+//		}
+//	}
 	
 	//1978 소수 찾기
 //	public static void main(String[] args) throws Exception {
