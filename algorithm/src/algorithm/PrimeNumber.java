@@ -4,42 +4,83 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 
 
 public class PrimeNumber {
 	
-	//4948 베르트랑 공준
+	//9020 골드바흐의 추측
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int num;
+		int repeat = Integer.parseInt(br.readLine());
 		
-		while (true) {
-			num = Integer.parseInt(br.readLine());
-			if(num == 0) break;
-			int count = 0;
-			ArrayList<Boolean> list = new ArrayList (2*num+1);
-			list.add(false);
-			list.add(false);
-			for(int i=2; i<=2*num; i++) list.add(i, true);
-		
-			for(int i=2; i<=2*num; i++) {
-				if(list.get(i)) {
-					for(int j=2; j*i<=2*num; j++) {
-						list.set(j*i, false);
-					}
-				} else continue;
+		while(repeat>0) {
+			int num = Integer.parseInt(br.readLine());
+			int half = num/2;
+			int a=half;
+			
+			if(primeChecker(half)) {
+				bw.append(Integer.toString(half)+" "+Integer.toString(half)+"\n");
+			} else {
+				while(!primeChecker(a) || !primeChecker(num-a)) {
+					a--;
+				}
+				if(primeChecker(a) && primeChecker(num-a)) {
+					bw.append(Integer.toString(a)+" "+Integer.toString(num-a)+"\n");
+				}						
 			}
-	
-			for(int i=num+1; i<=2*num; i++) {
-				if(list.get(i)) count++;
-			}
-			bw.append(Integer.toString(count)+"\n");
+			repeat--;
 		}
 		bw.flush();
 		bw.close();
 	}
+	
+	public static boolean primeChecker(int num) {
+		if (num == 2 || num == 3) return true;
+		if (num == 1 || num%2 == 0) return false;
+		else {
+			int temp = num/2;
+			for(int j=1; j<temp; j++) {
+				if(num%(2*j+1)==0) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+	
+	
+	//4948 베르트랑 공준
+//	public static void main(String[] args) throws Exception {
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//		int num;
+//		
+//		while (true) {
+//			num = Integer.parseInt(br.readLine());
+//			if(num == 0) break;
+//			int count = 0;
+//			ArrayList<Boolean> list = new ArrayList (2*num+1);
+//			list.add(false);
+//			list.add(false);
+//			for(int i=2; i<=2*num; i++) list.add(i, true);
+//		
+//			for(int i=2; i<=2*num; i++) {
+//				if(list.get(i)) {
+//					for(int j=2; j*i<=2*num; j++) {
+//						list.set(j*i, false);
+//					}
+//				} else continue;
+//			}
+//	
+//			for(int i=num+1; i<=2*num; i++) {
+//				if(list.get(i)) count++;
+//			}
+//			bw.append(Integer.toString(count)+"\n");
+//		}
+//		bw.flush();
+//		bw.close();
+//	}
 	
 	//1929 소수 구하기
 //	public static void main(String[] args) throws Exception {
