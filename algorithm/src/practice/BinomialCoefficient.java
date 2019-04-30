@@ -8,20 +8,14 @@ public class BinomialCoefficient {
 		} else return binomial(n-1, k) + binomial(n-1, k-1);
 	}
 	
-	public static int binomialM(int n, int k) {
-		int[][] binom = new int[n+1][k+1];
-		for (int i=0; i<=n; i++) {
-			for (int j=0; j<=i && j<=k; j++) {
-				binom[i][j] = -1;
-			}
-		}
+	public static int binomialM(int[][] binom, int n, int k) {
 		
 		if(n==k || k==0) {
 			return 1;
 		} else if (binom[n][k] > -1) {
 			return binom[n][k];
 		} else {
-			binom[n][k] = binomialM(n-1, k) + binomialM(n-1, k-1);
+			binom[n][k] = binomialM(binom, n-1, k) + binomialM(binom, n-1, k-1);
 			return binom[n][k];
 		}
 	}
@@ -42,7 +36,7 @@ public class BinomialCoefficient {
 	
 	public static void main(String[] args) {
 		
-		int n = 20;
+		int n = 40;
 		int k = 10;
 		
 		long start = System.currentTimeMillis();
@@ -50,8 +44,15 @@ public class BinomialCoefficient {
 		long end = System.currentTimeMillis();
 		System.out.println("실행 시간 : "+(end-start)/1000.0+"초");
 		
+		int[][] binom = new int[n+1][k+1];
+		for (int i=0; i<=n; i++) {
+			for (int j=0; j<=i && j<=k; j++) {
+				binom[i][j] = -1;
+			}
+		}
+		
 		start = System.currentTimeMillis();
-		System.out.println("M이항정리 "+n+"C"+k+"의 값은 "+binomialM(n, k)+"입니다.");
+		System.out.println("M이항정리 "+n+"C"+k+"의 값은 "+binomialM(binom, n, k)+"입니다.");
 		end = System.currentTimeMillis();
 		System.out.println("실행 시간 : "+(end-start)/1000.0+"초");
 		

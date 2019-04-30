@@ -14,10 +14,7 @@ public class RecursiveFucntion {
 		else return fibonacci(number-1)+fibonacci(number-2);
 	}
 	
-	public static int fibonacciM(int number) {
-		int[] f = new int[number+1];
-		Arrays.fill(f, -1);
-		
+	public static int fibonacciM(int[] f, int number) {
 		if(number==1||number==2) {
 			return 1;
 		}
@@ -25,7 +22,7 @@ public class RecursiveFucntion {
 			return f[number];
 		}
 		else {
-			f[number]=fibonacciM(number-1)+fibonacciM(number-2);
+			f[number]=fibonacciM(f, number-1)+fibonacciM(f, number-2);
 			return f[number];
 		}
 	}
@@ -42,7 +39,7 @@ public class RecursiveFucntion {
 	}
 	
 	public static void main(String[] args) {
-		int number = 40;
+		int number = 30;
 	
 		System.out.println(number+"팩토리얼은 "+factorial(number)+"입니다.");
 		
@@ -51,8 +48,11 @@ public class RecursiveFucntion {
 		long end = System.currentTimeMillis();
 		System.out.println("실행 시간 : "+(end-start)/1000.0+"초");
 		
+		int[] f = new int[number+1];
+		Arrays.fill(f, -1);
+		
 		start = System.currentTimeMillis();
-		System.out.println("M 피보나치 수열의 "+number+"번째 값은 "+fibonacciM(number)+"입니다.");
+		System.out.println("M 피보나치 수열의 "+number+"번째 값은 "+fibonacciM(f, number)+"입니다.");
 		end = System.currentTimeMillis();
 		System.out.println("실행 시간 : "+(end-start)/1000.0+"초");
 		
