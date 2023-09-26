@@ -5,12 +5,12 @@
 
 ## 문제 출처
 
-Backjoon Online Judge(<https://www.acmicpc.net/>) 
+Backjoon Online Judge(<https://www.acmicpc.net/>)  
 Programmers(<https://programmers.co.kr/>)
 
 
 
 ## 풀이 스펙
 
-java language ... 이클립스 이용 (2019) 
+java language ... 이클립스 이용 (2019)  
 python (2023~)
